@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Словарь</string>
+    <string name="searchInTheDictionary">Поиск в словаре</string>
+    <string name="settings">Настройки</string>
+    <string name="open">Открыть</string>
+    <string name="close">Закрыть</string>
+    <string name="api_key">API key</string>
+    <string name="api_id">API ID</string>
+    <string name="Theme">Тема</string>
+    <string name="play">Воспроизвести</string>
+    <string-array name="themeList">
+        <item>Синяя</item>
+        <item>Темная</item>
+        <item>Красная</item>
+    </string-array>
+</resources>
