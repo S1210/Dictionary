@@ -8,6 +8,8 @@
     <string name="api_id">API ID</string>
     <string name="Theme">Тема</string>
     <string name="play">Воспроизвести</string>
+    <string name="error_message">Ошибка соединения! Проверьте подключение к интернету или правильность введенных API</string>
+    <string name="error_not_file">Результатов не найдено</string>
     <string-array name="themeList">
         <item>Синяя</item>
         <item>Темная</item>

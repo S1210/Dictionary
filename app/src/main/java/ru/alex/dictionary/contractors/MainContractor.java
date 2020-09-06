@@ -13,6 +13,8 @@ public interface MainContractor {
         void updateRV(RecyclerViewMainAdapter adapter);
 
         void showToast(String word);
+
+        void showSnackbar(String message);
     }
 
     interface Presenter {
@@ -20,6 +22,8 @@ public interface MainContractor {
         void loadWords(List<DataWord> dataWords);
 
         void loadWords(String apiID, String apiKey, String word);
+
+        void returnError(String errorMessage);
     }
 
     interface Repository {

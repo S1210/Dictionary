@@ -8,6 +8,8 @@
     <string name="api_id">API ID</string>
     <string name="Theme">Theme</string>
     <string name="play">Play</string>
+    <string name="error_message">Connection error! Check your internet connection or entered APIs are correct</string>
+    <string name="error_not_file">No results found</string>
 
     <string-array name="themeList">
         <item>Blue</item>

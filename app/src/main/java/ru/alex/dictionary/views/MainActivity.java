@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
@@ -147,5 +149,10 @@ public class MainActivity extends AppCompatActivity implements MainContractor.Vi
     @Override
     public void showToast(String word) {
         Toast.makeText(this, word, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showSnackbar(String message) {
+        Snackbar.make(drawerLayout, message, Snackbar.LENGTH_LONG).setTextColor(Color.WHITE).show();
     }
 }

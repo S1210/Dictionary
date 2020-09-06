@@ -1,11 +1,13 @@
 package ru.alex.dictionary.presenters;
 
+import android.content.Context;
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 
 import java.io.IOException;
 import java.util.List;
 
+import ru.alex.dictionary.R;
 import ru.alex.dictionary.adapters.RecyclerViewMainAdapter;
 import ru.alex.dictionary.contractors.MainContractor;
 import ru.alex.dictionary.models.DataWord;
@@ -57,5 +59,14 @@ public class MainPresenter implements MainContractor.Presenter {
     @Override
     public void loadWords(String apiID, String apiKey, String word) {
         mRepository.getWords(this, apiID, apiKey, word);
+    }
+
+    @Override
+    public void returnError(String errorMessage) {
+        if (errorMessage.equals("Error")) {
+            mView.showSnackbar(((Context) mView).getString(R.string.error_message));
+        } else if (errorMessage.equals("Not file")) {
+            mView.showSnackbar(((Context) mView).getString(R.string.error_not_file));
+        }
     }
 }
