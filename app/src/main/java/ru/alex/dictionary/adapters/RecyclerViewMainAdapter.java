@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Collection;
 import java.util.List;
 
 import ru.alex.dictionary.R;
@@ -44,26 +43,6 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerViewMa
     @Override
     public int getItemCount() {
         return list.size();
-    }
-
-    public void setItems(Collection<DataWord> words) {
-        list.addAll(words);
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        list.clear();
-        notifyDataSetChanged();
-    }
-
-    public void addItems(int position, List<DataWord> words) {
-        list.add(position, words.get(position));
-        notifyItemInserted(position);
-    }
-
-    public void removeItems(int position) {
-        list.remove(position);
-        notifyItemRemoved(position);
     }
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {

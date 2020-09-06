@@ -4,20 +4,26 @@ import java.util.List;
 
 import ru.alex.dictionary.adapters.RecyclerViewMainAdapter;
 import ru.alex.dictionary.models.DataWord;
+import ru.alex.dictionary.presenters.MainPresenter;
 
 public interface MainContractor {
 
     interface View {
 
         void updateRV(RecyclerViewMainAdapter adapter);
+
+        void showToast(String word);
     }
 
     interface Presenter {
 
-        void loadTravels(List<DataWord> dataWords);
+        void loadWords(List<DataWord> dataWords);
+
+        void loadWords(String apiID, String apiKey, String word);
     }
 
     interface Repository {
 
+        void getWords(MainPresenter mainPresenter, String apiID, String apiKey, String word);
     }
 }

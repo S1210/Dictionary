@@ -55,6 +55,8 @@ public class SettingsActivity extends AppCompatActivity implements TextWatcher {
         etAPIKey.setText(sharedPreferences.getString(API_KEY, DEFAULT_API_KEY));
         etAPIId.setText(sharedPreferences.getString(API_ID, DEFAULT_API_ID));
         spTheme.setSelection(sharedPreferences.getInt(THEME_ID, 0));
+        etAPIKey.addTextChangedListener(this);
+        etAPIId.addTextChangedListener(this);
     }
 
     private void init() {
@@ -64,8 +66,6 @@ public class SettingsActivity extends AppCompatActivity implements TextWatcher {
         etAPIKey = findViewById(R.id.et_api_key);
         etAPIId = findViewById(R.id.et_api_id);
         spTheme = findViewById(R.id.sp_theme);
-        etAPIKey.addTextChangedListener(this);
-        etAPIId.addTextChangedListener(this);
         spTheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -124,6 +124,7 @@ public class SettingsActivity extends AppCompatActivity implements TextWatcher {
                 switch (item.getItemId()) {
                     case R.id.dictionary:
                         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                        finish();
                         break;
                     case R.id.settings:
                         break;
@@ -143,7 +144,7 @@ public class SettingsActivity extends AppCompatActivity implements TextWatcher {
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(API_KEY, Objects.requireNonNull(etAPIKey.getText()).toString());
-        editor.putString(API_KEY, Objects.requireNonNull(etAPIId.getText()).toString());
+        editor.putString(API_ID, Objects.requireNonNull(etAPIId.getText()).toString());
         editor.apply();
     }
 

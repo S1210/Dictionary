@@ -17,28 +17,34 @@ import javax.net.ssl.HttpsURLConnection;
 
 import ru.alex.dictionary.contractors.MainContractor;
 import ru.alex.dictionary.models.DataWord;
+import ru.alex.dictionary.presenters.MainPresenter;
 
 public class CallbackTask extends AsyncTask<String, Integer, String> {
 
     private MainContractor.Presenter mPresenter;
     private Context context;
+    private String app_id;
+    private String app_key;
 
     public CallbackTask(MainContractor.Presenter mPresenter, Context context) {
         this.mPresenter = mPresenter;
         this.context = context;
     }
 
+    public CallbackTask(MainPresenter mainPresenter, String apiID, String apiKey) {
+        mPresenter = mainPresenter;
+        app_id = apiID;
+        app_key = apiKey;
+    }
+
     @Override
     protected String doInBackground(String... params) {
-
-        final String app_id = "4206847b";
-        final String app_key = "01f3481c06edb4df76180f7cfa5b650f";
         try {
             URL url = new URL(params[0]);
             HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-            urlConnection.setRequestProperty("Accept","application/json");
-            urlConnection.setRequestProperty("app_id",app_id);
-            urlConnection.setRequestProperty("app_key",app_key);
+            urlConnection.setRequestProperty("Accept", "application/json");
+            urlConnection.setRequestProperty("app_id", app_id);
+            urlConnection.setRequestProperty("app_key", app_key);
 
             // read the output from the server
             BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -51,8 +57,7 @@ public class CallbackTask extends AsyncTask<String, Integer, String> {
 
             return stringBuilder.toString();
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return e.toString();
         }
@@ -82,7 +87,7 @@ public class CallbackTask extends AsyncTask<String, Integer, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mPresenter.loadTravels(dataWords);
+        mPresenter.loadWords(dataWords);
         System.out.println(result);
     }
 }

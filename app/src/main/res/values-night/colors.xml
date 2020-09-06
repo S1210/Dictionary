@@ -6,6 +6,6 @@
     <color name="primary_light">#FFF9C4</color>
     <color name="primary_text">#dfdfdf</color>
     <color name="secondary_text">#787878</color>
-    <color name="icons">#212121</color>
+    <color name="icons">#dfdfdf</color>
     <color name="divider">#BDBDBD</color>
 </resources>

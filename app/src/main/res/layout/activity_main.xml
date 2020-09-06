@@ -48,7 +48,7 @@
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/et_search"
                                 style="@style/EditTextMD"
-                                android:background="@color/icons"/>
+                                android:background="?android:attr/colorBackground"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>

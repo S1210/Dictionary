@@ -23,15 +23,12 @@ public class MainPresenter implements MainContractor.Presenter {
     }
 
     @Override
-    public void loadTravels(final List<DataWord> dataWords) {
+    public void loadWords(final List<DataWord> dataWords) {
         this.dataWords = dataWords;
         RecyclerViewMainAdapter.OnWordClickListener wordClickListener = new RecyclerViewMainAdapter.OnWordClickListener() {
             @Override
             public void onWordClick(DataWord word) {
-//                Intent intent = new Intent((Context) mView, TravelActivity.class);
-//                intent.putExtra(DBHelper.ID_TRAVEL, travel.getId());
-//                intent.putExtra(DBHelper.NAME, travel.getNameTravel());
-//                mView.openTravel(intent);
+                mView.showToast(word.getWord());
             }
         };
         RecyclerViewMainAdapter.OnPlayClickListener playClickListener = new RecyclerViewMainAdapter.OnPlayClickListener() {
@@ -55,5 +52,10 @@ public class MainPresenter implements MainContractor.Presenter {
         };
         adapter = new RecyclerViewMainAdapter(this.dataWords, wordClickListener, playClickListener);
         mView.updateRV(adapter);
+    }
+
+    @Override
+    public void loadWords(String apiID, String apiKey, String word) {
+        mRepository.getWords(this, apiID, apiKey, word);
     }
 }

@@ -12,6 +12,7 @@ import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -31,7 +32,6 @@ import ru.alex.dictionary.R;
 import ru.alex.dictionary.adapters.RecyclerViewMainAdapter;
 import ru.alex.dictionary.contractors.MainContractor;
 import ru.alex.dictionary.presenters.MainPresenter;
-import ru.alex.dictionary.services.CallbackTask;
 
 public class MainActivity extends AppCompatActivity implements MainContractor.View, TextWatcher {
 
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainContractor.Vi
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private TextInputEditText etSearch;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements MainContractor.Vi
     }
 
     private void setTheme() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SettingsActivity.SETTINGS, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(SettingsActivity.SETTINGS, MODE_PRIVATE);
         switch (sharedPreferences.getInt(SettingsActivity.THEME_ID, 0)) {
             case 0:
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -68,13 +69,10 @@ public class MainActivity extends AppCompatActivity implements MainContractor.Vi
         }
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = getTheme();
-
         theme.resolveAttribute(android.R.attr.windowBackground, typedValue, true);
         getWindow().getDecorView().setBackgroundColor(typedValue.data);
-
         theme.resolveAttribute(android.R.attr.colorPrimary, typedValue, true);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(typedValue.data));
-
         theme.resolveAttribute(android.R.attr.colorPrimaryDark, typedValue, true);
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -94,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements MainContractor.Vi
     private void initRV() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-//        mPresenter.loadTravels(dataWords);
     }
 
     @SuppressLint("RestrictedApi")
@@ -116,21 +113,13 @@ public class MainActivity extends AppCompatActivity implements MainContractor.Vi
                         break;
                     case R.id.settings:
                         startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                        finish();
                         break;
                 }
                 drawerLayout.closeDrawers();
                 return true;
             }
         });
-    }
-
-    private String dictionaryEntries() {
-        final String language = "en-gb";
-        final String word = Objects.requireNonNull(etSearch.getText()).toString();
-        final String fields = "pronunciations";
-        final String strictMatch = "false";
-        final String word_id = word.toLowerCase();
-        return "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + language + "/" + word_id + "?" + "fields=" + fields + "&strictMatch=" + strictMatch;
     }
 
     @Override
@@ -140,7 +129,9 @@ public class MainActivity extends AppCompatActivity implements MainContractor.Vi
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-            new CallbackTask(mPresenter, this).execute(dictionaryEntries());
+        mPresenter.loadWords(sharedPreferences.getString(SettingsActivity.API_ID, SettingsActivity.DEFAULT_API_ID),
+                sharedPreferences.getString(SettingsActivity.API_KEY, SettingsActivity.DEFAULT_API_KEY),
+                Objects.requireNonNull(etSearch.getText()).toString());
     }
 
     @Override
@@ -151,5 +142,10 @@ public class MainActivity extends AppCompatActivity implements MainContractor.Vi
     @Override
     public void updateRV(RecyclerViewMainAdapter adapter) {
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void showToast(String word) {
+        Toast.makeText(this, word, Toast.LENGTH_LONG).show();
     }
 }
