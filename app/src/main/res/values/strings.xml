@@ -10,6 +10,11 @@
     <string name="play">Play</string>
     <string name="error_message">Connection error! Check your internet connection or entered APIs are correct</string>
     <string name="error_not_file">No results found</string>
+    <string name="word">Word:</string>
+    <string name="dialect">Dialect:</string>
+    <string name="example">Example:</string>
+    <string name="definition">Definition:</string>
+    <string name="other_forms">Other forms:</string>
 
     <string-array name="themeList">
         <item>Blue</item>

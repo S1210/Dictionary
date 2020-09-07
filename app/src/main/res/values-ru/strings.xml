@@ -10,6 +10,12 @@
     <string name="play">Воспроизвести</string>
     <string name="error_message">Ошибка соединения! Проверьте подключение к интернету или правильность введенных API</string>
     <string name="error_not_file">Результатов не найдено</string>
+    <string name="word">Слово:</string>
+    <string name="dialect">Диалект:</string>
+    <string name="example">Пример:</string>
+    <string name="definition">Определение:</string>
+    <string name="other_forms">Другие формы:</string>
+
     <string-array name="themeList">
         <item>Синяя</item>
         <item>Темная</item>

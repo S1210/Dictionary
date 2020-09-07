@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,11 +48,21 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerViewMa
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
         private TextView tvWord;
+        private TextView tvDialect;
+        private TextView tvDefinition;
+        private TextView tvExample;
+        private TextView tvOtherForms;
+        private LinearLayout llExample;
         private ImageButton ibPlay;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             tvWord = itemView.findViewById(R.id.tv_word);
+            tvDialect = itemView.findViewById(R.id.tv_dialect);
+            tvDefinition = itemView.findViewById(R.id.tv_definition);
+            tvExample = itemView.findViewById(R.id.tv_example);
+            llExample = itemView.findViewById(R.id.llExample);
+            tvOtherForms = itemView.findViewById(R.id.tv_other_forms);
             ibPlay = itemView.findViewById(R.id.ibPlay);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,6 +83,13 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerViewMa
         @SuppressLint("SetTextI18n")
         public void bind(DataWord word) {
             tvWord.setText(word.getWord());
+            tvDialect.setText(word.getDialect());
+            tvDefinition.setText(word.getDefinitions());
+            if (word.getExample() == null) {
+                llExample.setVisibility(View.GONE);
+            }
+            tvExample.setText(word.getExample());
+            tvOtherForms.setText(word.getOtherForms());
         }
     }
 
