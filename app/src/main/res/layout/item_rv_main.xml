@@ -41,6 +41,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_dialect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -60,6 +61,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_definition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -79,7 +81,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/llExample"
+                    android:id="@+id/ll_example"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -99,6 +101,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_other_forms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">

@@ -53,16 +53,22 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerViewMa
         private TextView tvExample;
         private TextView tvOtherForms;
         private LinearLayout llExample;
+        private LinearLayout llDialect;
+        private LinearLayout llDefinition;
+        private LinearLayout llOtherForms;
         private ImageButton ibPlay;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             tvWord = itemView.findViewById(R.id.tv_word);
             tvDialect = itemView.findViewById(R.id.tv_dialect);
+            llDialect = itemView.findViewById(R.id.ll_dialect);
             tvDefinition = itemView.findViewById(R.id.tv_definition);
+            llDefinition = itemView.findViewById(R.id.ll_definition);
             tvExample = itemView.findViewById(R.id.tv_example);
-            llExample = itemView.findViewById(R.id.llExample);
+            llExample = itemView.findViewById(R.id.ll_example);
             tvOtherForms = itemView.findViewById(R.id.tv_other_forms);
+            llOtherForms = itemView.findViewById(R.id.ll_other_forms);
             ibPlay = itemView.findViewById(R.id.ibPlay);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -83,13 +89,22 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter<RecyclerViewMa
         @SuppressLint("SetTextI18n")
         public void bind(DataWord word) {
             tvWord.setText(word.getWord());
-            tvDialect.setText(word.getDialect());
-            tvDefinition.setText(word.getDefinitions());
-            if (word.getExample() == null) {
-                llExample.setVisibility(View.GONE);
-            }
-            tvExample.setText(word.getExample());
+            isVisible(llDialect, tvDialect, word.getDialect());
+            isVisible(llDefinition, tvDefinition, word.getDefinitions());
+            isVisible(llExample, tvExample, word.getExample());
+            isVisible(llOtherForms, tvOtherForms, word.getOtherForms());
             tvOtherForms.setText(word.getOtherForms());
+            if (word.getLink() == null) {
+                ibPlay.setEnabled(false);
+            }
+        }
+    }
+
+    private void isVisible(LinearLayout linearLayout, TextView textView, String s) {
+        if (s == null) {
+            linearLayout.setVisibility(View.GONE);
+        } else {
+            textView.setText(s);
         }
     }
 

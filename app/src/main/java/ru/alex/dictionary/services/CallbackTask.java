@@ -75,10 +75,14 @@ public class CallbackTask extends AsyncTask<String, Integer, String> {
                     dataWord.setDefinitions(lexicalEntriesObject.getString("text"));
                     JSONArray entries = lexicalEntriesObject.getJSONArray("entries");
                     JSONObject entriesObject = entries.getJSONObject(0);
-                    JSONArray pronunciations = entriesObject.getJSONArray("pronunciations");
-                    JSONObject pronunciationsObject = pronunciations.getJSONObject(0);
-                    dataWord.setLink(pronunciationsObject.getString("audioFile"));
-                    dataWord.setDialect(pronunciationsObject.getString("dialects").replaceAll("[\"\\[\\]]", ""));
+                    try {
+                        JSONArray pronunciations = entriesObject.getJSONArray("pronunciations");
+                        JSONObject pronunciationsObject = pronunciations.getJSONObject(0);
+                        dataWord.setLink(pronunciationsObject.getString("audioFile"));
+                        dataWord.setDialect(pronunciationsObject.getString("dialects").replaceAll("[\"\\[\\]]", ""));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     JSONArray senses = entriesObject.getJSONArray("senses");
                     JSONObject sensesObject = senses.getJSONObject(0);
                     try {
@@ -88,17 +92,25 @@ public class CallbackTask extends AsyncTask<String, Integer, String> {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    dataWord.setDefinitions(sensesObject.getString("definitions").replaceAll("[\"\\[\\]]", ""));
-                    JSONArray variantForms = entriesObject.getJSONArray("variantForms");
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for (int j = 0; j < variantForms.length(); j++) {
-                        JSONObject variantFormsObject = variantForms.getJSONObject(j);
-                        stringBuilder.append(variantFormsObject.getString("text"));
-                        if (j < variantForms.length() - 1) {
-                            stringBuilder.append(", ");
-                        }
+                    try {
+                        dataWord.setDefinitions(sensesObject.getString("definitions").replaceAll("[\"\\[\\]]", ""));
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    dataWord.setOtherForms(stringBuilder.toString());
+                    try {
+                        JSONArray variantForms = entriesObject.getJSONArray("variantForms");
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int j = 0; j < variantForms.length(); j++) {
+                            JSONObject variantFormsObject = variantForms.getJSONObject(j);
+                            stringBuilder.append(variantFormsObject.getString("text"));
+                            if (j < variantForms.length() - 1) {
+                                stringBuilder.append(", ");
+                            }
+                        }
+                        dataWord.setOtherForms(stringBuilder.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     dataWords.add(dataWord);
                 }
             } catch (JSONException e) {
