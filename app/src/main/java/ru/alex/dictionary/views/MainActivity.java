@@ -126,19 +126,17 @@ public class MainActivity extends AppCompatActivity implements MainContractor.Vi
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         mPresenter.loadWords(sharedPreferences.getString(SettingsActivity.API_ID, SettingsActivity.DEFAULT_API_ID),
                 sharedPreferences.getString(SettingsActivity.API_KEY, SettingsActivity.DEFAULT_API_KEY),
-                Objects.requireNonNull(etSearch.getText()).toString());
+                Objects.requireNonNull(etSearch.getText()).toString().toLowerCase());
     }
 
     @Override
     public void afterTextChanged(Editable s) {
-
     }
 
     @Override

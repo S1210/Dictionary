@@ -23,11 +23,5 @@ public interface MainContractor {
 
         void loadWords(String apiID, String apiKey, String word);
 
-        void returnError(String errorMessage);
-    }
-
-    interface Repository {
-
-        void getWords(MainPresenter mainPresenter, String apiID, String apiKey, String word);
     }
 }

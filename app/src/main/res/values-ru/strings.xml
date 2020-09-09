@@ -8,13 +8,15 @@
     <string name="api_id">API ID</string>
     <string name="Theme">Тема</string>
     <string name="play">Воспроизвести</string>
-    <string name="error_message">Ошибка соединения! Проверьте подключение к интернету или правильность введенных API</string>
+    <string name="error_api">Проверьте правильность введенных API</string>
     <string name="error_not_file">Результатов не найдено</string>
     <string name="word">Слово:</string>
     <string name="dialect">Диалект:</string>
     <string name="example">Пример:</string>
     <string name="definition">Определение:</string>
     <string name="other_forms">Другие формы:</string>
+    <string name="error_connection">Ошибка соединения! Проверьте подключение к интернету</string>
+    <string name="other_error">Непредвиденная ошибка</string>
 
     <string-array name="themeList">
         <item>Синяя</item>
